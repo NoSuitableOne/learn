@@ -7,7 +7,18 @@ module.exports = {
     },
     output: {
         filename: '[name].bundle.js',
-        path: path.resolve(__dirname, './dist')
+        path: path.join(__dirname, '/dist'),
+        //publicPath: '/'
+    },
+    devServer: {
+        contentBase: path.join(__dirname, "/dist"),
+        inline: true,
+        hot: true,
+        port: 32000,
+        host: '0.0.0.0',
+        https: false,
+        open: false,
+        compress: true
     },
     module: {
         loaders: [
@@ -23,6 +34,8 @@ module.exports = {
                 }
             }
         ]
-    }
-
+    },
+    plugins:[
+        new webpack.HotModuleReplacementPlugin()
+    ]
 };

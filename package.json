@@ -5,7 +5,8 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "./node_modules/webpack --color"
+    "build": "./node_modules/.bin/webpack --config webpack.config.base.js --color",
+    "dev": "./node_modules/.bin/webpack-dev-server --config webpack.config.dev.js --color"
   },
   "author": "MA",
   "license": "ISC",
