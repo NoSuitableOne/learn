@@ -32,6 +32,13 @@ module.exports = {
                         'react'
                     ]
                 }
+            },
+            {
+                test: /\.css$/,
+                loader: [
+                            'style-loader',
+                            'css-loader'
+                    ]
             }
         ]
     },
