@@ -1,13 +1,9 @@
-import React from 'React';
+import React from 'react';
 
 class ShoppingList extends React.Component {
-    constructor (props) {
-        super(props);
-    }
-
     render () {
 
-        return {
+        return (
             <div className='shopping-list'>
                 <h1>Shopping List for {this.props.name}</h1>
                 <ul>
@@ -16,18 +12,8 @@ class ShoppingList extends React.Component {
                     <li>Oculus</li>
                 </ul>
             </div>
-        }
+        )
     }
 }
-
-// ShoppingList.propTypes = {
-//     name: React.PropTypes.string
-// }
-//
-// ShoppingList.defaultProps = {
-//     name: 'Your shopping car'
-// }
-
-
 
 export default ShoppingList;

@@ -15,9 +15,9 @@ module.exports = {
         inline: true,
         hot: true,
         port: 32000,
-        host: '0.0.0.0',
+        host: '127.0.0.1',
         https: false,
-        open: false,
+        open: true,
         compress: true
     },
     module: {
@@ -36,9 +36,9 @@ module.exports = {
             {
                 test: /\.css$/,
                 loader: [
-                            'style-loader',
-                            'css-loader'
-                    ]
+                    'style-loader',
+                    'css-loader'
+                ]
             }
         ]
     },
