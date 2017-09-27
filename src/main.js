@@ -8,6 +8,6 @@ import ShoppingList from './script/component/shoppinglist';
 import Game from './script/component/all';
 
 ReactDom.render (
-    <Game info="Powerd by React"/>,
+    <ShoppingList name="Mark"/>,
     document.getElementById('root')
 )
