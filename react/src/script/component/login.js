@@ -5,17 +5,39 @@ class Login extends React.Component {
     constructor (props) {
         super(props);
         this.state = {
-            usernameFlag: false
+            usernameFlag: false,
+            passwordFlag: false
         };
         this.checkUsername= this.checkUsername.bind(this);
+        this.checkPassword= this.checkPassword.bind(this);
     }
 
-    checkUsername () {
-        this.setState({
-            usernameFlag: !this.state.usernameFlag
+    checkUsername (event) {
+        const reg = new RegExp('(^[a-zA-Z])([a-zA-Z0-9]{5,11})', 'g');
+        event.preventDefault();
+        if (reg.test(event.target.value)) {
+            this.setState({
+                usernameFlag: true
+            });
+        } else {
+            this.setState({
+                usernameFlag: false
+            });
+        }
+    }
 
-        });
-        console.log(this.state.usernameFlag)
+    checkPassword (event) {
+        const reg = new RegExp('//w{6,64}', 'g');
+        event.preventDefault();
+        if (reg.test(event.target.value)) {
+            this.setState({
+                passwordFlag: true
+            });
+        } else {
+            this.setState({
+                passwordFlag: false
+            });
+        }
     }
 
     render () {
@@ -24,11 +46,12 @@ class Login extends React.Component {
                 <p>
                     <label htmlFor="username">username: </label>
                     <input type="text" name="username" placeholder="username" onBlur={this.checkUsername} />
-                    <span>{this.state.usernameFlag || 'username cannot be blank'}</span>
+                    <span>{!this.state.usernameFlag || 'invalid username'}</span>
                 </p>
                 <p>
                     <label htmlFor="password">password: </label>
-                    <input type="password" name="password" placeholder="password"/>
+                    <input type="password" name="password" placeholder="password" onBlur={this.checkPassword} />
+                    <span>{!this.state.passwordFlag || 'invalid password'}</span>
                 </p>
                 <p>
                     <button>submit</button>
