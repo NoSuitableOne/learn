@@ -5,6 +5,7 @@ from flask import Flask, render_template, request
 # from flask_wtf import Form
 # from wtforms import StringField, SubmitField
 # from wtforms.validators import Required
+from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = 'haha'
@@ -32,4 +33,4 @@ def internal_server_error(e):
     return render_template('404.html')
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=True, port=10086)
