@@ -4,6 +4,7 @@ import {
     mark
 } from '../state/actions/all';
 import Pure from '../components/pure';
+import Button from '../components/button';
 
 
 class galerie extends Component {
@@ -13,7 +14,6 @@ class galerie extends Component {
     }
 
     render () {
-        console.log(this.props)
         return (
             <div>
                 { this.props.info.server.isFetching ?
@@ -35,6 +35,7 @@ class galerie extends Component {
                     <li key={2} onClick={() => this.props.markItem(2)}>2</li>
                 </ul>
                 <Pure />
+                <Button value="my-btn" />
             </div>
         );
     }

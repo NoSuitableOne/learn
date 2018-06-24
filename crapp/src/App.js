@@ -6,8 +6,7 @@ import {
 } from 'react-router-dom';
 import logo from './logo.svg';
 import './App.css';
-import Example from './containers/example';
-import Galerie from './containers/galerie';
+import { Entry, Example, Galerie } from './containers';
 
 
 class App extends Component {
@@ -19,14 +18,16 @@ class App extends Component {
           <h1 className="App-title">Welcome to React</h1>
         </header>
         <Router>
-          <div>
+          <div className='menu'>
             <ul>
               <li><Link to="/">首页</Link></li>
               <li><Link to="/example">画廊</Link></li>
+              <li><Link to="/entry">入口</Link></li>
             </ul>
             <hr/>
             <Route exact path="/" component={Galerie}/>
             <Route path="/example" component={Example}/>
+            <Route path="/entry" component={Entry}/>
           </div>
         </Router>
       </div>

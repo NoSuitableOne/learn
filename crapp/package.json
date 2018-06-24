@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "antd": "^3.5.0",
     "cross-fetch": "^2.1.0",
     "react": "^16.3.1",
     "react-dom": "^16.3.1",
@@ -14,12 +15,15 @@
     "redux-thunk": "^2.2.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
+    "start": "react-app-rewired start",
+    "build": "react-app-rewired build",
+    "test": "react-app-rewired test --env=jsdom",
     "eject": "react-scripts eject"
   },
   "devDependencies": {
-    "mockjs": "^1.0.1-beta3"
+    "babel-plugin-import": "^1.7.0",
+    "mockjs": "^1.0.1-beta3",
+    "react-app-rewire-less": "^2.1.1",
+    "react-app-rewired": "^1.5.2"
   }
 }
