@@ -1,13 +1,14 @@
 let a = [1,2,3,4,5,6,7,8];
 let b = [];
-let c = [];
 
-while(a.length > 0) {
-  let i = Math.floor(Math.random() * a.length);
-  let temp = a[a.length - 1];
-  a[a.length - 1] = a[i];
-  a[i] = temp;
-  c.push(a.pop()); 
+// fisher-yates
+let j = a.length - 1;
+while(j > 0) {
+  let k = Math.floor(Math.random() * (j + 1));
+  let temp = a[j];
+  a[j] = a[k];
+  a[k] = temp;
+  j--; 
 }
 
 // math random
