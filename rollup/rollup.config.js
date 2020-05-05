@@ -29,7 +29,19 @@ export default {
     sourcemap: env === 'prod',
     plugins: [
       ...plugins, 
-      getBabelOutputPlugin({ presets: ['@babel/preset-env'] })
+      getBabelOutputPlugin({
+        presets: [
+          [
+            '@babel/env',
+            {
+              targets: {
+                browsers: "> 1%",
+                node: 8
+              }
+            }
+          ]
+        ]
+      })
     ]
   }],
   plugins: plugins
