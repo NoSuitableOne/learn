@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>rollup test</title>
+</head>
+<body>
+  <h1>rollup 测试页面</h1>
+  <script src='./dist/bundle.umd.js'></script>
+  <script>
+    let test = {
+      key: 'value'
+    };
+    let a = 1;
+    let b = 3;
+    test.c = _tool.add(a, b);
+    _tool.log(test);
+  </script>
+</body>
+</html>
