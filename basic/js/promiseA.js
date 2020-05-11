@@ -26,9 +26,9 @@ function promiseCancelableWrapper (p) {
 };
 
 class Plan {
-  constructor(queue, state) {
+  constructor(queue, ctx) {
     this.queue = queue || [];
-    this.state = state || {};
+    this.ctx = ctx || {};
   }
 
   before (task) {
@@ -39,39 +39,34 @@ class Plan {
     this.queue.push(task);
   }
 
-  setState = (value) => {
-    this.state = {
-      ...this.state,
-      ...value
-    };
-  }
-
-  getState = () => {
-    return this.state;
-  };
-
   eachCall = (lastPromise, next) => {
-    lastPromise
-    .then(value => {
-      this.setState(value);
-    })
-    .catch(error => {
+    return lastPromise.then(value => {
+      this.ctx = {
+        ...this.ctx,
+        ...value
+      };
+      if (next.FIN) {
+        return this.ctx; 
+      } else {
+        return next.fn(this.ctx, ...next.params);
+      }
+    }).catch(error => {
       console.error('error:', error);
     });
-    return next.fn(...next.params);
   }
 
   execute () {
+    this.queue.push(Promise.resolve({ FIN: true }));
     return this.queue.reduce(
-      (lastPromise, ele) => this.eachCall(lastPromise, ele), 
-      new Promise(resolve => resolve())
+      (lastPromise, task) => this.eachCall(lastPromise, task), 
+      Promise.resolve()
     );
   }
 }
 
 let number = Math.random();
 
-function eg (number, therehold = 0.5, name, time = 2) {
+function eg (ctx, number, therehold = 0.5, name, time = 2) {
   return new Promise(( resolve, reject ) => {
     setTimeout(() => {
       if (number > therehold) {
@@ -88,23 +83,21 @@ function eg (number, therehold = 0.5, name, time = 2) {
 
 /* async tasks */
 let planA = new Plan([
-  { 
+  {
     fn: eg,
-    params: [ number, 0, 'eg1', 10 ]
+    params: [number, 0, 'eg1', 1]
   }, 
   {
     fn: eg,
-    params: [ number, 0, 'eg2' ]  
+    params: [number, 0, 'eg2']
   },
   {
     fn: eg,
-    params: [ number, 0, 'eg3' ]
+    params: [number, 0, 'eg3', 3]
   },
   {
     fn: eg,
-    params: [ number, 0, 'eg4' ]
+    params: [number, 0, 'eg4', 2]
   }
 ]);
-planA.execute().then(()=>{
-  console.log(planA.getState());
-});
+planA.execute().then(() => console.log(planA.ctx));
